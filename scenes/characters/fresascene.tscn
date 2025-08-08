@@ -1,3 +1,23 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
 
-[node name="fresascene" type="Node2D"]
+[ext_resource path="res://scenes/characters/fresascene.gd" type="Script" id=1]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.562145
+height = 0.405315
+
+[node name="fresascene" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+
+[node name="SpringArm" type="SpringArm" parent="."]
+
+[node name="Camera" type="Camera" parent="SpringArm"]
+
+[node name="RayCast" type="RayCast" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

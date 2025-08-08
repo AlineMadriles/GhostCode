@@ -1,6 +1,6 @@
 extends KinematicBody
 
-export var character_name = "El cholo"
+export var character_name = "La Fresa"
 export var speed := 6.0
 export var jump_force := 12.0
 export var gravity := -24.8
