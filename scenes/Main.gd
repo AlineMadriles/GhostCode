@@ -12,9 +12,18 @@ func _ready():
 			var player = player_scene.instance()
 			add_child(player)
 			player.global_transform = spawn_point.global_transform
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			
+			# Make sure the character camera is current
+			var camera = player.get_node("SpringArm/Camera")
+			if camera:
+				camera.current = true
+				print("Character camera activated")
+			else:
+				print("Camera not found in character!")
+				
 		else:
 			print("Could not load player scene from: ", Global.selected_character_path)
+			get_tree().change_scene("res://scenes/CharacterSelect.tscn")
 	else:
-		print("No character selected.")
+		print("No character selected - returning to character select")
 		get_tree().change_scene("res://scenes/CharacterSelect.tscn")

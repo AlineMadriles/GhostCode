@@ -16,6 +16,13 @@ var rotation_x := 0.0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	# Debug info
+	print("Character spawned: ", character_name)
+	print("Camera exists: ", $SpringArm/Camera != null)
+	if $SpringArm/Camera:
+		$SpringArm/Camera.current = true
+		print("Camera set to current")
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
