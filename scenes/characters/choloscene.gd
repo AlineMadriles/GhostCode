@@ -11,7 +11,7 @@ var direction := Vector3.ZERO
 onready var spring_arm := $SpringArm
 onready var camera := $SpringArm/Camera
 
-export var mouse_sensitivity := 0.2
+export var mouse_sensitivity := 0.05
 var rotation_x := 0.0
 
 func _ready():
@@ -23,6 +23,9 @@ func _ready():
 	if $SpringArm/Camera:
 		$SpringArm/Camera.current = true
 		print("Camera set to current")
+		
+	print("Character Y position on spawn: ", global_transform.origin.y)
+	print("Character collision shape position: ", $CollisionShape.transform.origin)
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -34,6 +37,10 @@ func _physics_process(delta):
 	get_input()
 	apply_gravity(delta)
 	move_and_slide(velocity, Vector3.UP)
+	
+	#testing
+	if not is_on_floor():
+		print("NOT ON GROUND! Y position: ", global_transform.origin.y)
 
 func get_input():
 	direction = Vector3.ZERO
@@ -58,6 +65,13 @@ func get_input():
 
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y = jump_force
+	#testing
+	if velocity.length() > 0.1:
+		print("Moving! Velocity: ", velocity)
+		
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
+		velocity.y = jump_force
+		print("JUMP!")
 
 func apply_gravity(delta):
 	if not is_on_floor():

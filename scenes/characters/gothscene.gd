@@ -11,7 +11,7 @@ var direction := Vector3.ZERO
 onready var spring_arm := $SpringArm
 onready var camera := $SpringArm/Camera
 
-export var mouse_sensitivity := 0.2
+export var mouse_sensitivity := 0.05
 var rotation_x := 0.0
 
 func _ready():

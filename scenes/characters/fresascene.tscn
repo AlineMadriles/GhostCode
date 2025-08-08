@@ -3,8 +3,8 @@
 [ext_resource path="res://scenes/characters/fresascene.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleShape" id=1]
-radius = 0.562145
-height = 2.176
+radius = 0.5
+height = 2.0
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 1, 0.505882, 0.505882, 1 )
@@ -18,7 +18,7 @@ mid_height = 2.0
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.27271, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27271, 0 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -26,10 +26,10 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.31
 mesh = SubResource( 3 )
 
 [node name="SpringArm" type="SpringArm" parent="."]
-transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 1.5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 
 [node name="Camera" type="Camera" parent="SpringArm"]
-transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, -3 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8 )
 
 [node name="RayCast" type="RayCast" parent="."]
 
