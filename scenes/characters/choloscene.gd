@@ -61,12 +61,17 @@ func _input(event):
 			take_damage(10)
 		if event.scancode == KEY_H:  # Tecla H para healing
 			heal(10)
+	if event.is_action_just_pressed("ui_cancel"):
+		var pause_menu = get_tree().current_scene.get_node("PauseMenu")
+		if pause_menu:
+			pause_menu.toggle_pause()
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		rotation_x = clamp(rotation_x - event.relative.y * mouse_sensitivity, -60, 60)
 		spring_arm.rotation_degrees.x = rotation_x
 		rotate_y(-event.relative.x * mouse_sensitivity)
+
 
 func _physics_process(delta):
 	get_input()

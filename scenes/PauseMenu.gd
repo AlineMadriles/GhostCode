@@ -6,9 +6,6 @@ func _ready():
 	
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-func _input(event):
-	if event.is_action_just_pressed("ui_cancel"):
-		toggle_pause()
 
 func toggle_pause():
 	var is_paused = !get_tree().paused
