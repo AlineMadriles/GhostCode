@@ -17,9 +17,9 @@ func update_characters_buttons():
 	$Panel/GothButton.disabled = !("C" in unlocked_characters)
 	
 	if 	$Panel/FresaButton.disabled:
-			$Panel/FresaButton.text = "La fresa (Sin desbloquear)"
+			$Panel/FresaButton.text = "La fresa 🔓🔓🔓🔓🔒🔒"
 	if 	$Panel/GothButton.disabled:
-			$Panel/GothButton.text = "La gotica (Sin desbloquear)"
+			$Panel/GothButton.text = "La gotica"
 
 func _on_cholo_pressed():
 	if "A" in unlocked_characters:

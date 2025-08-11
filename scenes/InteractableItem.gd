@@ -26,14 +26,14 @@ func _on_player_entered(body):
 		player_nearby = true
 		print("Presiona E para recoger: ", item_name)
 
-func _on_player_exited():
+func _on_player_exited(body):  
 	if is_player(body):
 		player_nearby = false
 
 func is_player(body):
 	return (body.name == "Cholo" or
-		body.name == "Fresa" or
-		body.name == "Gotica" or
+		body.name == "fresascene" or
+		body.name == "gothscene" or
 		body.name.begins_with("Jugador"))
 
 func _input(event):

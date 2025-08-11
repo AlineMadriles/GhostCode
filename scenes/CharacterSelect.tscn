@@ -41,7 +41,7 @@ margin_left = 444.0
 margin_top = 425.0
 margin_right = 574.0
 margin_bottom = 465.0
-text = "La fresa"
+text = "La fresa "
 
 [node name="GothButton" type="Button" parent="Panel"]
 margin_left = 651.0
