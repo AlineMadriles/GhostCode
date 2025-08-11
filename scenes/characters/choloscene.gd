@@ -55,16 +55,16 @@ func die():
 	get_tree().reload_current_scene()
 
 # Temporal! SOLO TESTEO, eliminar mas tarde
-func _input(event):
-	if event is InputEventKey and event.pressed:
+func _unhandled_key_input(event):
+	if event.pressed:
 		if event.scancode == KEY_T:  # Tecla T para damage
 			take_damage(10)
 		if event.scancode == KEY_H:  # Tecla H para healing
 			heal(10)
-	if event.is_action_just_pressed("ui_cancel"):
-		var pause_menu = get_tree().current_scene.get_node("PauseMenu")
-		if pause_menu:
-			pause_menu.toggle_pause()
+		if Input.is_action_just_pressed("ui_cancel"):
+			var pause_menu = get_tree().current_scene.get_node("PauseMenu")
+			if pause_menu:
+				pause_menu.toggle_pause()
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
