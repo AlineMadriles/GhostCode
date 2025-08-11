@@ -1,35 +1,75 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://settins/foggieenv.tres" type="Environment" id=1]
 [ext_resource path="res://scenes/Main.gd" type="Script" id=2]
 [ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/InteractableItem.gd" type="Script" id=4]
+[ext_resource path="res://scenes/ExitDoor.gd" type="Script" id=5]
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 1, 0.17329, 1 )
 
 [sub_resource type="PlaneMesh" id=2]
 
-[sub_resource type="CylinderMesh" id=4]
-
-[sub_resource type="SpatialMaterial" id=5]
-albedo_color = Color( 1, 0, 0, 1 )
-
 [sub_resource type="PrismMesh" id=6]
 
 [sub_resource type="SpatialMaterial" id=7]
 albedo_color = Color( 0.129412, 0, 1, 1 )
 
+[sub_resource type="PhysicsMaterial" id=8]
+bounce = 0.27
+
+[sub_resource type="SpatialMaterial" id=10]
+
+[sub_resource type="BoxShape" id=25]
+extents = Vector3( 0.927038, 1, 1 )
+
+[sub_resource type="BoxShape" id=11]
+
+[sub_resource type="SpatialMaterial" id=12]
+
+[sub_resource type="BoxShape" id=13]
+
+[sub_resource type="SpatialMaterial" id=14]
+
+[sub_resource type="BoxShape" id=15]
+
+[sub_resource type="SpatialMaterial" id=16]
+
+[sub_resource type="CapsuleMesh" id=17]
+
+[sub_resource type="CapsuleShape" id=18]
+
+[sub_resource type="SphereMesh" id=19]
+
+[sub_resource type="SphereShape" id=20]
+
+[sub_resource type="SphereMesh" id=21]
+
+[sub_resource type="SphereShape" id=22]
+
+[sub_resource type="CubeMesh" id=23]
+
+[sub_resource type="BoxShape" id=24]
+
 [node name="Main" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 164.507, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.4867, 0 )
+light_color = Color( 0.0196078, 0.0588235, 0.0823529, 1 )
+light_energy = 2.164
+directional_shadow_split_1 = 0.0
+directional_shadow_split_2 = 0.246
+directional_shadow_split_3 = 0.485
+directional_shadow_depth_range = 1
+directional_shadow_max_distance = 198.8
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 1 )
 
 [node name="Ground" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0619784, 0 )
+transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.143217, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Ground"]
 transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
@@ -42,14 +82,214 @@ mesh = SubResource( 2 )
 [node name="SpawnPoint" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0440947, 0 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2026, 1.01183, 12.1363 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
-
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.60687, 1.01183, 15.5087 )
 mesh = SubResource( 6 )
 material/0 = SubResource( 7 )
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MessageLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchor_left = -0.001
+anchor_right = 0.964
+anchor_bottom = 0.927
+margin_left = 51.024
+margin_top = 16.0
+margin_right = 91.024
+margin_bottom = 56.0
+rect_scale = Vector2( 0.877936, 0.917242 )
+mouse_filter = 2
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Building" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.89801, -1.87763 )
+physics_material_override = SubResource( 8 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="Building"]
+operation = 2
+
+[node name="OuterWalls" type="CSGBox" parent="Building/CSGCombiner"]
+transform = Transform( 20, 0, 0, 0, 6, 0, 0, 0, 20, 0, 0, 0 )
+material = SubResource( 10 )
+
+[node name="Interior" type="CSGBox" parent="Building/CSGCombiner"]
+transform = Transform( 18, 0, 0, 0, 5.5, 0, 0, 0, 18, 0, 0.25, 0 )
+operation = 2
+
+[node name="Door" type="CSGBox" parent="Building/CSGCombiner"]
+transform = Transform( 3, 0, 0, 0, 5, 0, 0, 0, 3, 17.4946, -0.0932646, -13.919 )
+operation = 2
+
+[node name="SpotLight" type="SpotLight" parent="Building"]
+transform = Transform( 0.998948, -0.000328106, -0.04585, 0.0458512, 0.00714835, 0.998923, 0, -0.999974, 0.00715588, -0.832455, 4.75987, 2.33232 )
+light_color = Color( 1, 0, 0, 1 )
+light_energy = 1.127
+light_indirect_energy = 2.746
+light_specular = 0.0
+light_bake_mode = 2
+shadow_enabled = true
+spot_range = 20.587
+spot_attenuation = 1.93187
+spot_angle = 55.93
+spot_angle_attenuation = 0.901249
+
+[node name="CollisionShape" type="CollisionShape" parent="Building"]
+transform = Transform( 19.2514, 0, 0, 0, -6.03545, 0, 0, 0, 1.2429, 0, 0, 18.2914 )
+shape = SubResource( 25 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="Building"]
+transform = Transform( 19.2514, 0, 0, 0, -6.03545, 0, 0, 0, 1.2429, 0, 0, -19.101 )
+shape = SubResource( 25 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Building"]
+transform = Transform( 0.185134, 0, 1.24285, 0, -6.03545, 0, -19.2505, 0, 0.0119526, -18.5476, 0, 0.388439 )
+shape = SubResource( 25 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Building"]
+transform = Transform( 0.185134, 0, 1.24285, 0, -6.03545, 0, -19.2505, 0, 0.0119526, 19.3389, 0, 7.48973 )
+shape = SubResource( 25 )
+
+[node name="Building2" type="StaticBody" parent="."]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 57.397, 5.89801, -1.66627 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Building2"]
+shape = SubResource( 11 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="Building2"]
+operation = 2
+
+[node name="OuterWalls" type="CSGBox" parent="Building2/CSGCombiner"]
+transform = Transform( 20, 0, 0, 0, 6, 0, 0, 0, 20, 0, 0, 0 )
+material = SubResource( 12 )
+
+[node name="Interior" type="CSGBox" parent="Building2/CSGCombiner"]
+transform = Transform( 18, 0, 0, 0, 5.5, 0, 0, 0, 18, 0, 0.25, 0 )
+operation = 2
+
+[node name="Door" type="CSGBox" parent="Building2/CSGCombiner"]
+transform = Transform( 3, 0, 0, 0, 5, 0, 0, 0, 3, 17.4946, -0.0932646, 13.9354 )
+operation = 2
+
+[node name="SpotLight" type="SpotLight" parent="Building2"]
+transform = Transform( 1, 0, 0, 0, -0.000575944, 1, 0, -1, -0.000575944, 0, 4.10529, 0 )
+light_energy = 2.0
+spot_range = 8.192
+spot_angle = 60.0
+
+[node name="Building3" type="StaticBody" parent="."]
+transform = Transform( -4.37114e-08, 0, -1.2, 0, 1, 0, 1, 0, -5.24537e-08, 52.2139, 5.89801, -41.8635 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Building3"]
+shape = SubResource( 13 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="Building3"]
+operation = 2
+
+[node name="OuterWalls" type="CSGBox" parent="Building3/CSGCombiner"]
+transform = Transform( 20, 0, 0, 0, 6, 0, 0, 0, 20, 0, 0, 0 )
+material = SubResource( 14 )
+
+[node name="Interior" type="CSGBox" parent="Building3/CSGCombiner"]
+transform = Transform( 18, 0, 1.49012e-08, 0, 5.5, 0, -1.49011e-08, 0, 18, 0, 0.25, 0 )
+operation = 2
+
+[node name="Door" type="CSGBox" parent="Building3/CSGCombiner"]
+transform = Transform( 3, 0, 1.13687e-13, 0, 5, 0, 0, 0, 3, 17.4946, -0.0932646, 14.6666 )
+operation = 2
+depth = 1.50093
+
+[node name="SpotLight" type="SpotLight" parent="Building3"]
+transform = Transform( 1, 0, 0, 0, -0.000575944, 1, 0, -1, -0.000575944, 0, 4.10529, 0 )
+light_energy = 2.0
+spot_range = 8.192
+spot_angle = 60.0
+
+[node name="Building4" type="StaticBody" parent="."]
+transform = Transform( -4.37114e-08, 0, -1.2, 0, 1, 0, 1, 0, -5.24537e-08, 5.79617, 5.89801, -41.8278 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Building4"]
+shape = SubResource( 15 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="Building4"]
+operation = 2
+
+[node name="OuterWalls" type="CSGBox" parent="Building4/CSGCombiner"]
+transform = Transform( 20, 0, 0, 0, 6, 0, 0, 0, 20, 0, 0, 0 )
+material = SubResource( 16 )
+
+[node name="Interior" type="CSGBox" parent="Building4/CSGCombiner"]
+transform = Transform( 18, 0, 0, 0, 5.5, 0, 0, 0, 18, 0, 0.25, 0 )
+operation = 2
+
+[node name="Door" type="CSGBox" parent="Building4/CSGCombiner"]
+transform = Transform( 3, 0, 1.86279e-09, 0, 5, 0, -1.86264e-09, 0, 3, 17.7546, -0.0932646, -14.2838 )
+operation = 2
+depth = 1.54019
+
+[node name="SpotLight" type="SpotLight" parent="Building4"]
+transform = Transform( 1, 0, 0, 0, -0.000575944, 1, 0, -1, -0.000575944, 0, 4.10529, 0 )
+light_energy = 2.0
+spot_range = 8.192
+spot_angle = 60.0
+
+[node name="Item1" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46752, 1.83289, 5.32143 )
+script = ExtResource( 4 )
+item_name = "Credencial de Alumno"
+item_color = Color( 0.0313726, 0.713726, 0.345098, 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Item1"]
+mesh = SubResource( 17 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Item1"]
+shape = SubResource( 18 )
+
+[node name="Item2" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.29388, 1.96604, 6.2233 )
+script = ExtResource( 4 )
+item_name = "Llave de laboratorio"
+item_color = Color( 0.921569, 0.431373, 0.0705882, 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Item2"]
+mesh = SubResource( 19 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Item2"]
+shape = SubResource( 20 )
+
+[node name="Item3" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.89501, 1.52348, 4.35521 )
+script = ExtResource( 4 )
+item_name = "USB"
+item_color = Color( 0.792157, 0.831373, 0.858824, 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Item3"]
+mesh = SubResource( 21 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Item3"]
+shape = SubResource( 22 )
+
 [node name="PauseMenu" parent="." instance=ExtResource( 3 )]
+
+[node name="ExitDoor" type="StaticBody" parent="."]
+transform = Transform( 0.966441, 0, 0, 0, 5.16816, 0, 0, 0, 3.0561, 19.0556, 5.54143, -15.8631 )
+script = ExtResource( 5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ExitDoor"]
+transform = Transform( 1, 0, 0, 0, 0.966589, 0, 0, 0, 0.973227, 0, 0, 0 )
+mesh = SubResource( 23 )
+skeleton = NodePath("../..")
+
+[node name="CollisionShape" type="CollisionShape" parent="ExitDoor"]
+shape = SubResource( 24 )

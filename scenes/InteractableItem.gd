@@ -18,8 +18,10 @@ func _ready():
 	area.connect("body_exited", self, "_on_player_exited")
 	
 	var mesh_instance = get_node("MeshInstance")
-	if mesh_instance and mesh_instance.get_surface_material(0):
-		mesh_instance.ger_surface_material(0).albedo_color = item_color
+	if not mesh_instance.get_surface_material(0):
+			var material = SpatialMaterial.new()
+			mesh_instance.set_surface_material(0, material)
+	mesh_instance.get_surface_material(0).albedo_color
 
 func _on_player_entered(body):
 	if is_player(body):

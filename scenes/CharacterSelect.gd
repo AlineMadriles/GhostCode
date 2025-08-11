@@ -41,7 +41,7 @@ func start_game(choice):
 	if character_paths.has(choice):
 		if ResourceLoader.exists(character_paths[choice]):
 			Global.selected_character_path = character_paths[choice]
-			get_tree().change_scene("res://scenes/BuildingInterior.tscn")
+			get_tree().change_scene("res://scenes/Main.tscn")
 			print("Personaje seleccionado: " + choice)
 		else:
 			print("Error: ", character_paths[choice])

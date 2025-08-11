@@ -1,7 +1,5 @@
 extends Control
 
-#onready var health_bar = $Control/MarginContainer/VBoxContainer/ProgressBar
-#onready var health_label =  $Control/MarginContainer/VBoxContainer/Label
 onready var health_bar = get_node("ProgressBar")
 onready var health_label = get_node("Label")
 
@@ -27,5 +25,5 @@ func _ready():
 			child.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	print("UI nodes found:")
-	print("ProgressBar: ", $MarginContainer/VBoxContainer/ProgressBar)
-	print("Label: ", $MarginContainer/VBoxContainer/Label)
+	print("ProgressBar: ", $ProgressBar)
+	print("Label: ", $Label)

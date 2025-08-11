@@ -55,6 +55,17 @@ func update_door_appearance(unlocked):
 		if unlocked:
 			material.albedo_color = Color.green
 			material.emission = Color(0, 0.5, 0)
+
+			# Disable collision when unlocked
+			var static_collision = get_node_or_null("CollisionShape")
+			if static_collision:
+				static_collision.disabled = true
+				print("Exit door collision disabled, you can now pass.")
 		else:
 			material.albedo_color = Color.red
 			material.emission = Color(0.3, 0, 0)
+
+			# Enable collision when locked
+			var static_collision = get_node_or_null("CollisionShape")
+			if static_collision:
+				static_collision.disabled = false
