@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://settins/foggieenv.tres" type="Environment" id=1]
 [ext_resource path="res://scenes/BuildingInterior.gd" type="Script" id=2]
 [ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/InteractableItem.gd" type="Script" id=4]
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 1, 0.17329, 1 )
@@ -12,6 +13,18 @@ extents = Vector3( 1, 0.17329, 1 )
 [sub_resource type="BoxShape" id=4]
 
 [sub_resource type="SpatialMaterial" id=5]
+
+[sub_resource type="CapsuleMesh" id=6]
+
+[sub_resource type="CapsuleShape" id=7]
+
+[sub_resource type="SphereMesh" id=8]
+
+[sub_resource type="SphereShape" id=9]
+
+[sub_resource type="SphereMesh" id=10]
+
+[sub_resource type="SphereShape" id=11]
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 2 )
@@ -130,3 +143,33 @@ transform = Transform( 3, 0, 1.86265e-09, 0, 5, 0, -1.86265e-09, 0, 3, 17.7546, 
 operation = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource( 3 )]
+
+[node name="Item1" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1695, 1.83289, -8.41376 )
+script = ExtResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Item1"]
+mesh = SubResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Item1"]
+shape = SubResource( 7 )
+
+[node name="Item2" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5619, 1.96604, 10.2412 )
+script = ExtResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Item2"]
+mesh = SubResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Item2"]
+shape = SubResource( 9 )
+
+[node name="Item3" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1048, 1.52348, 11.5147 )
+script = ExtResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Item3"]
+mesh = SubResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Item3"]
+shape = SubResource( 11 )
